@@ -1,12 +1,13 @@
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 export default function Navbar() {
+  const { pathname, state } = useLocation();
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            Navbar
+           iNoteBook
           </Link>
           <button
             className="navbar-toggler"
@@ -22,12 +23,12 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/Home">
+                <Link className={`nav-link ${pathname ==="/Home"?'active':""}`} aria-current="page" to="/Home">
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/About">
+                <Link className={`nav-link ${pathname ==="/About"?'active':""}`} to="/About">
                   About
                 </Link>
               </li>

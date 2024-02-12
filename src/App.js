@@ -10,12 +10,14 @@ function App() {
     <>
       <NoteState>
         <Navbar />
-        <h1 className="text-center my-4">iNoteBook App</h1>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/home" element={<Home />} />
-          <Route exact path="/about" element={<About />} />
-        </Routes>
+        <div className="container">
+          <h1 className="text-center my-4">iNoteBook App</h1>
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/home" element={<Home />} />
+            <Route exact path="/about" element={<About />} />
+          </Routes>
+        </div>
       </NoteState>
     </>
   );
