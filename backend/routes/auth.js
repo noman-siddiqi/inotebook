@@ -40,7 +40,8 @@ router.post("/createUser", userValidator, async (req, res) => {
   const authToken = jwt.sign(data, JWT_SECRET_KEY);
     console.log(authToken.toString());
     await user.save();
-    return res.status(200).json({authToken});
+    success = true;
+    return res.status(200).json({success, authToken});
   } catch (error) {
     console.error("Error occurred:", error.message);
     return res.status(500).json({ message: "Internal Server Error"});
@@ -51,6 +52,7 @@ router.post("/createUser", userValidator, async (req, res) => {
 //ROUTE # 2: Authenticate a user using: GET /api/auth/login. No login is required
 router.post('/login', loginValidator, async(req, res) => {
   const errors = validationResult(req);
+  let success = false;
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
@@ -58,7 +60,8 @@ router.post('/login', loginValidator, async(req, res) => {
   try {
     let user = await User.findOne({email: email});
     if(!user){
-      return res.status(404).json({ message: "Please try to login with valid login credentials"});
+      success = true;
+      return res.status(404).json({success, message: "Please try to login with valid login credentials"});
     }
     const passwordCompare = await bcrypt.compare(password, user.password);
     if(!passwordCompare){
@@ -70,8 +73,8 @@ router.post('/login', loginValidator, async(req, res) => {
       }
     }
     const authToken = jwt.sign(data, JWT_SECRET_KEY);
-    console.log(authToken.toString());
-    return res.status(200).json({authToken});
+    success = true;
+    return res.status(200).json({success, authToken});
   } catch (error) {
     console.error("Error occurred:", error.message);
     return res.status(500).json({ message: "Internal Server Error"});
