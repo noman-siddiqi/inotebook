@@ -25,8 +25,8 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link className={`nav-link ${location.pathname==="/about"? "active": ""}`} to="/about">About</Link>
                         </li>
-
                     </ul>
+                    {localStorage.getItem('token') ? <h6 className="text-white bg-dark" style={{marginRight: 5 + 'em'}}>Logged in: {localStorage.getItem('email')}</h6>: ""}
                     {!localStorage.getItem('token') ? <form className="d-flex"> 
                     <Link className="btn btn-primary mx-1" to="/login" role="button">Login</Link>
                     <Link className="btn btn-primary mx-1" to="/signup" role="button">Signup</Link>

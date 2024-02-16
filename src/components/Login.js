@@ -20,6 +20,7 @@ function Login(props) {
         if (json.success){
             // Save the auth token and redirect
             localStorage.setItem('token', json.authToken); 
+            localStorage.setItem('email', credentials.email);
             props.showAlert("Logged in Successfully", "success");
             navigate('/');
         } else {
